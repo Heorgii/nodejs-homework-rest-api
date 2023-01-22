@@ -1,32 +1,26 @@
-const express = require('express')
+const express = require('express');
+const contacts = require('../../controllers/contacts');
+const router = express.Router();
 
-const router = express.Router()
+const schema = require('../../schema/contactSchema');
+const validation = require('../../middlewares/validation');
 
-router.get('/', async (req, res, next) => {
-  // res.json({ contacts });
-  res.json({ message: 'Tets ' }); //template message
-});
+router.get('/', contacts.getContact);
 
-router.get('/:contactId', async (req, res, next) => {
-  // const [contact] = contacts.find(contact =>{
-  //   return contact.id === id;
-  // })
+router.get('/:contactId', contacts.contactById);
 
-  // return contact;
-  res.json({ message: 'template message' });
-});
+router.post('/', 
+  validation(schema.schemaAddContact),
+  contacts.createContact
+);
 
-router.post('/', async (req, res, next) => {
+router.put('/:contactId', 
+  validation(schema.schemaUpdateContact),
+  contacts.updateContact
+);
 
-  res.json({ message: 'template message' });
-});
-
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' });
-});
-
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' });
-});
+router.delete('/:contactId', 
+  contacts.deleteContact
+);
 
 module.exports = router;
