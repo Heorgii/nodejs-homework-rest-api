@@ -14,12 +14,10 @@ validation(schema.schemaAddContact),
   contacts.createContact
 );
 
-// router.post('/',contacts.createContact);
-
-// router.put('/:contactId', 
-// validation(schema.schemaUpdateContact),
-//   contacts.updateContact
-// );
+router.put('/:contactId', 
+validation(schema.schemaUpdateContact),
+  contacts.updateContact
+);
 
 router.delete('/:contactId',
   contacts.deleteContact

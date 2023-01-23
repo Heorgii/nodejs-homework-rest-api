@@ -35,6 +35,7 @@ const contactById = async (req, res) => {
 
 const createContact = async (req, res) => {
     const result = await operation.addContact(req.body);
+    console.log('RESULT',body);
 
     res.status(201).json({
         status: 'success',
