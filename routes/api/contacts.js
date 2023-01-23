@@ -9,17 +9,19 @@ router.get('/', contacts.getContact);
 
 router.get('/:contactId', contacts.contactById);
 
-router.post('/', 
-  validation(schema.schemaAddContact),
+router.post('/',
+validation(schema.schemaAddContact),
   contacts.createContact
 );
 
-router.put('/:contactId', 
-  validation(schema.schemaUpdateContact),
-  contacts.updateContact
-);
+// router.post('/',contacts.createContact);
 
-router.delete('/:contactId', 
+// router.put('/:contactId', 
+// validation(schema.schemaUpdateContact),
+//   contacts.updateContact
+// );
+
+router.delete('/:contactId',
   contacts.deleteContact
 );
 

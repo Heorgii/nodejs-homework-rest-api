@@ -20,9 +20,9 @@ const contactById = async (req, res) => {
         res.json({
             status: 'error',
             code: 404,
-            message: 'Not found',
+           message: 'Not found',
         });
-    }
+    };
 
     res.json({
         status: 'success',
@@ -55,7 +55,6 @@ const deleteContact = async (req, res, next) => {
             status: 'error',
             code: 404,
             message: "Not found",
-    
         });
     }
 
