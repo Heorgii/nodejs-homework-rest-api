@@ -1,4 +1,5 @@
 const operation = require('../models/contacts');
+const createError = require('http-errors');
 
 const getContact = async (req, res) => {
     const result = await operation.listContacts();
@@ -68,16 +69,12 @@ const deleteContact = async (req, res, next) => {
     });
 }
 
-const updateContact = async (req, res) => {
+const updateContact = async (req, res, next) => {
     const { contactId } = req.params;
     const result = await operation.updateContact(contactId, req.body);
 
-    if (!result) {
-        res.json({
-            status: 'error',
-            code: 404,
-            message: "Not found",
-        });
+    if (result === 0) {
+        return next(createError(404, 'Not found'));
     }
 
     res.json({

@@ -18,10 +18,9 @@ const getContactById = async (contactId) => {
   return contact;
 }
 
-const addContact = async (body) => {
+const addContact = async body => {
   const { name, email, phone } = body;
-  console.log(body);
-  
+
   const newContact = {
     id: uuid.v4(),
     name: name,
@@ -56,11 +55,10 @@ const updateContact = async (contactId, body) => {
     return null;
   }
 
-  const contact = getContactById(contactId);
+  const contact = await getContactById(contactId);
   contacts[index] = { ...contact, ...body };
 
   await fs.writeFile(contactsPath, JSON.stringify(contacts));
-
 }
 
 module.exports = {
