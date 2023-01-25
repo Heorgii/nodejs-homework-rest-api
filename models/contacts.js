@@ -37,7 +37,8 @@ const addContact = async body => {
 const removeContact = async (contactId) => {
   const contacts = await listContacts();
   const index = contacts.findIndex(contact => contact.id === contactId);
-  const deleteContact = contacts[index];
+  const deleteContact = contacts.splice(index, 1);
+  
   if (index.id === -1) {
     return null;
   }
