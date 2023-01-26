@@ -10,12 +10,12 @@ router.get('/', contacts.getContact);
 router.get('/:contactId', contacts.contactById);
 
 router.post('/',
-  validation(schema.schemaContact),
+  validation(schema.schemaAddContact),
   contacts.createContact
 );
 
 router.put('/:contactId',
-  validation(schema.schemaContact),
+  validation(schema.schemaUpdateContact),
   contacts.updateContact
 );
 

@@ -73,7 +73,7 @@ const updateContact = async (req, res, next) => {
     const { contactId } = req.params;
     const result = await operation.updateContact(contactId, req.body);
 
-    if (result === 0) {
+    if (!result) {
         return next(createError(404, 'Not found'));
     }
 
