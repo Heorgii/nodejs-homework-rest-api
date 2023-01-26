@@ -3,7 +3,6 @@ const contacts = require('../../controllers/contacts');
 const router = express.Router();
 
 const { schemaCnt: schema } = require('../../schema');
-// const {schemaAddContact, schemaUpdateContact} = require('../../schema');
 const validation = require('../../middlewares/validation');
 
 router.get('/', contacts.getContact);
