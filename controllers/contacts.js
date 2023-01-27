@@ -13,16 +13,12 @@ const getContact = async (req, res) => {
     });
 }
 
-const contactById = async (req, res) => {
+const contactById = async (req, res, next) => {
     const { contactId } = req.params;
     const result = await operation.getContactById(contactId);
 
     if (!result) {
-        res.json({
-            status: 'error',
-            code: 404,
-            message: 'Not found',
-        });
+        return next(createError(404, 'Not found'));
     };
 
     res.json({
@@ -52,11 +48,7 @@ const deleteContact = async (req, res, next) => {
     const result = await operation.removeContact(contactId);
 
     if (!result) {
-        res.json({
-            status: 'error',
-            code: 404,
-            message: "Not found",
-        });
+        return next(createError(404, 'Not found'));
     }
 
     res.json({
