@@ -70,3 +70,4 @@ module.exports = {
   addContact,
   updateContact,
 }
+
