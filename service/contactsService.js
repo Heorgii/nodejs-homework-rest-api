@@ -17,7 +17,7 @@ const updateCnt = async (id, body) => {
 }
 
 const updateStatusCnt = async (id, body) => {
-    return Contact.findByIdAndRemove({ _id: id }, { $set: { favorite: body } }, { new: true });
+    return Contact.findByIdAndUpdate({ _id: id }, { $set: { favorite: body } }, { new: true });
 }
 
 const deleteCnt = async id => {

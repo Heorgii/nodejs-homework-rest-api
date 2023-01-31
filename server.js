@@ -19,5 +19,5 @@ mongoose.Promise = global.Promise;
     console.log(`Server not running. Error: ${err.message}`);
     process.exit(1);
   }
-});
+})();
 
