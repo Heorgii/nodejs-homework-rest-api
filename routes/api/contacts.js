@@ -2,7 +2,7 @@ const express = require('express');
 const contacts = require('../../controllers/contacts');
 const router = express.Router();
 
-const { schemaCnt: schema } = require('../../schema');
+const  schema  = require('../../models/contactsModel');
 const validation = require('../../middlewares/validation');
 
 router.get('/', contacts.getContact);
@@ -16,6 +16,11 @@ router.post('/',
 
 router.put('/:contactId',
   validation(schema.schemaUpdateContact),
+  contacts.updateContact
+);
+
+router.patch('/:contactId/favorite',
+  validation(schema.schemaUpdateStatus),
   contacts.updateContact
 );
 
