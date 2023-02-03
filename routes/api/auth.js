@@ -13,7 +13,7 @@ router.post('/register',
 
 router.post('/login',
     validation(schema.schemaLogin),
-    user.registration,
+    user.login,
 );
 
 router.get('/logout', auth, user.logout);

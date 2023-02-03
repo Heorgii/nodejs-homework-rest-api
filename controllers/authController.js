@@ -11,8 +11,8 @@ const registration = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const { token, userTokens } = await service.login(req.body);
-    const { username, email, subscription } = userTokens;
+    const { token, userWithToken } = await service.login(req.body);
+    const { username, email, subscription } = userWithToken;
 
     res.status(200).json({
         token: token,
@@ -29,11 +29,20 @@ const logout = async (req, res) => {
 
 
 const getUser = async (req, res) => {
-
+    const { username, email, subscription } = req.user;
+    res.json({
+        user:
+            { username, email, subscription }
+    });
 }
 
 const updateUser = async (req, res) => {
-
+    const user = await service.updateUser(req.user._id, req.body);
+    const { username, email, subscription } = user;
+    res.json({
+        user:
+            { username, email, subscription }
+    });
 }
 
 module.exports = {

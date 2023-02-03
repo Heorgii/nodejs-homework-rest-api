@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 require('dotenv').config;
-const { SECRET_KEY } = process.env;
+const SECRET_KEY = 'mongodb+srv://heorgii:somePasfowsomewoRk@cluster0.jeemcul.mongodb.net/db-contacts/users';
+// const { SECRET_KEY } = process.env;
+
 const { User } = require('../models/usersModel');
 
 const registration = async body => {
@@ -31,10 +33,10 @@ const login = async body => {
         id: user._id
     }
 
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1d' });
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '10d' });
 
-    const userTokens = await User.findByIdAndUpdate(user._id, { token });
-    return { token, userTokens };
+    const userWithToken = await User.findByIdAndUpdate(user._id, { token });
+    return { token, userWithToken };
 }
 
 const logout = async id => {

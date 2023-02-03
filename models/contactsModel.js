@@ -30,9 +30,9 @@ const schemaAddContact = Joi.object({
   name: Joi.string().min(3).required(),
 
   email: Joi.string()
-      .email({
-          minDomainSegments: 2, tlds: { allow: ['com', 'net'] }
-      }).required(),
+    .email({
+      minDomainSegments: 2, tlds: { allow: ['com', 'net'] }
+    }).required(),
 
   phone: Joi.string().min(5).required(),
 
@@ -43,9 +43,9 @@ const schemaUpdateContact = Joi.object({
   name: Joi.string().min(3),
 
   email: Joi.string()
-      .email({
-          minDomainSegments: 2, tlds: { allow: ['com', 'net'] }
-      }),
+    .email({
+      minDomainSegments: 2, tlds: { allow: ['com', 'net'] }
+    }),
 
   phone: Joi.string().min(5),
 
