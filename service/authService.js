@@ -2,10 +2,9 @@ const { Unauthorized } = require('http-errors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-require('dotenv').config;
-const SECRET_KEY = 'mongodb+srv://heorgii:somePasfowsomewoRk@cluster0.jeemcul.mongodb.net/db-contacts/users';
-// const { SECRET_KEY } = process.env;
+require('dotenv').config();
 
+const { SECRET_KEY } = process.env;
 const { User } = require('../models/usersModel');
 
 const registration = async body => {

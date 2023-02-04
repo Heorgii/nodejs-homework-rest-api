@@ -1,12 +1,12 @@
 const { Unauthorized } = require('http-errors');
 const jwt = require('jsonwebtoken');
 
-require('dotenv').config;
+require('dotenv').config();
 const { SECRET_KEY } = process.env;
 const { User } = require('../models/usersModel');
 
 const auth = async (res, req, next) => {
-    const { authorization = "" } = req.headers;
+    const { authorization = '' } = req.headers;
     const [bearer, token] = authorization.split(' ');
 
     try {
@@ -30,4 +30,4 @@ const auth = async (res, req, next) => {
     }
 }
 
-module.exports =  auth ;
+module.exports = { auth };
