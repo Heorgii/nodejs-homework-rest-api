@@ -18,7 +18,7 @@ router.post('/login',
 
 router.get('/logout', auth, user.logout);
 
-router.get('/current', auth, user.logout);
+router.get('/current', auth, user.getUser);
 
 router.patch('/',
     validation(schema.schemaUpdate),
