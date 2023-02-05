@@ -27,9 +27,9 @@ const logout = async (req, res) => {
     res.status(204).json();
 }
 
-
 const getUser = async (req, res) => {
     const { username, email, subscription } = req.user;
+    console.log(req.user);
     res.json({
         user:
             { username, email, subscription }
