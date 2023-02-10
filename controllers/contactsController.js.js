@@ -28,7 +28,7 @@ const createContact = async (req, res) => {
 const updateContact = async (req, res, next) => {
     const { contactId } = req.params;
     const { _id } = req.user;
-    const result = await service.updateCnt(contactId, req.body, _id);///{ }мб треба буде
+    const result = await service.updateCnt({contactId, _id, ...req.body});
 
     if (!result) {
         return next(createError(404, 'Not found'));

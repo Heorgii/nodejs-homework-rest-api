@@ -5,7 +5,7 @@ require('dotenv').config();
 const { SECRET_KEY } = process.env;
 const { User } = require('../models/usersModel');
 
-const auth = async (res, req, next) => {
+const auth = async (req, res, next) => {
     const { authorization = '' } = req.headers;
     const [bearer, token] = authorization.split(' ');
 

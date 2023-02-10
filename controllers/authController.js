@@ -29,10 +29,11 @@ const logout = async (req, res) => {
 
 const getUser = async (req, res) => {
     const { username, email, subscription } = req.user;
-    console.log(req.user);
+
     res.json({
-        user:
-            { username, email, subscription }
+        user:{
+            username, email, subscription
+        }
     });
 }
 
