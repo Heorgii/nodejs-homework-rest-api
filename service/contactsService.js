@@ -10,7 +10,7 @@ const getCnt = async (userId, query) => {
             { owner: userId, favorite: favotite },
             "",
             { skip, limit: +limit }
-        );
+        ).populate('owner', '_id username email subscription');
     }
 }
 
