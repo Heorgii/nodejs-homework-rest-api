@@ -1,17 +1,22 @@
 const { Contact } = require('../models/contactsModel');
-const { User } = require('../models/usersModel');
 
 const getCnt = async (userId, query) => {
-    const { page = 1, limit = 20, favotite } = query;
+    const { page = 1, limit = 20, favorite } = query;
     const skip = (page - 1) * limit;
 
-    if (favotite) {
+    if (favorite) {
         return Contact.find(
-            { owner: userId, favorite: favotite },
+            { owner: userId, favorite: favorite },
             "",
             { skip, limit: +limit }
         ).populate('owner', '_id username email subscription');
     }
+
+    return Contact.find(
+        { owner: userId },
+        "",
+        { skip, limit: +limit }
+    ).populate('owner', '_id username email subscription');
 }
 
 const getCntById = async (id, userId) => {
