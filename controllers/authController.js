@@ -1,5 +1,5 @@
 const service = require('../service/authService');
-// const files = require('../service/')
+const files = require('../service/filesService');
 
 const registration = async (req, res) => {
     const user = await service.registration(req.body);
@@ -50,10 +50,10 @@ const updateUser = async (req, res) => {
 }
 
 const updateAvatar = async (req, res) => {
-    const avatarUrl = await service.updateUser(req.user._id, req.body);
-    const { username, email, subscription } = user;
+    const avatarUrl = await files.updateFiles('avatars', req.file);
+    await service.updateUser(req.user._id, { avatarUrl });
     res.json({
-        avatarUrl
+        avatarUrl,
     });
 }
 
