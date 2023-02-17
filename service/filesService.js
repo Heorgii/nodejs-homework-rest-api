@@ -15,7 +15,7 @@ const updateFiles = async (fieldname, file) => {
         await fs.rename(publicFileUrl, tempName);
         const fileUrl = path.join('public', fieldname, fileId);
         resizeImg(fileUrl);
-        return fileUrl; 
+        return fileUrl;
 
     } catch (err) {
         await fs.unlink(tempName);
@@ -30,4 +30,4 @@ const resizeImg = async path => {
     })
 }
 
-module.exports = updateFiles;
+module.exports = { updateFiles };
