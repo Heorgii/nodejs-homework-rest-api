@@ -1,11 +1,15 @@
 const service = require('../service/authService');
+const files = require('../service/filesService');
 
 const registration = async (req, res) => {
     const user = await service.registration(req.body);
-    const { username, email, subscription } = user;
+
     res.status(201).json({
         user: {
-            username, email, subscription,
+            username: user.username,
+            email: user.email,
+            subscription: user.subscription,
+            avatarURL: user.avatarURL,
         }
     });
 }
@@ -28,11 +32,11 @@ const logout = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const { username, email, subscription } = req.user;
+    const { username, email, subscription, avatarURL } = req.user;
 
     res.json({
-        user:{
-            username, email, subscription
+        user: {
+            username, email, subscription, avatarURL
         }
     });
 }
@@ -46,10 +50,19 @@ const updateUser = async (req, res) => {
     });
 }
 
+const updateAvatar = async (req, res) => {
+    const avatarURL = await files.updateFiles('avatars', req.file);
+    await service.updateUser(req.user._id, { avatarURL });
+    res.json({
+        avatarURL,
+    });
+}
+
 module.exports = {
     registration,
     login,
     logout,
     getUser,
     updateUser,
+    updateAvatar,
 }

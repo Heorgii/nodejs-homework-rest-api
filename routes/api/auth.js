@@ -5,6 +5,7 @@ const user = require('../../controllers/authController');
 const schema = require('../../models/usersModel');
 const validation = require('../../middlewares/validation');
 const { auth } = require('../../middlewares/auth');
+const upload = require('../../middlewares/upload');
 
 router.post('/register',
     validation(schema.schemaRegister),
@@ -25,5 +26,12 @@ router.patch('/',
     auth,
     user.updateUser
 );
+
+router.patch('/avatars',
+   auth,
+   upload.single('avatar'),
+   user.updateAvatar
+);
+
 
 module.exports = router;
