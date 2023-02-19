@@ -9,7 +9,7 @@ const registration = async (req, res) => {
             username: user.username,
             email: user.email,
             subscription: user.subscription,
-            avatarURL: user.avatar,
+            avatarURL: user.avatarURL,
         }
     });
 }

@@ -3,16 +3,16 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const jimp = require("jimp");
 
-const publicDir = path.join(__dirname, "public");
+const publicDir = path.join(__dirname, "../public");
 
 const updateFiles = async (fieldname, file) => {
     const { path: tempName, originalname } = file;
-    const [, extension] = originalname.split(' ');
+    const [, extension] = originalname.split('.');
     const fileId = ` ${uuidv4(10)}.${extension}`;
 
     try {
         const resultUpload = path.join(publicDir, fieldname, fileId);
-        await fs.rename(resultUpload, tempName);
+        await fs.rename(tempName, resultUpload);
         const fileUrl = path.join('public', fieldname, fileId);
         resizeImg(fileUrl);
         return fileUrl;
@@ -26,7 +26,7 @@ const updateFiles = async (fieldname, file) => {
 const resizeImg = async path => {
     await jimp.read(path, (err, img) => {
         if (err) throw err;
-        img.resize(256, 256).writeAsync(path);
+        img.resize(250, 250).writeAsync(path);
     })
 }
 

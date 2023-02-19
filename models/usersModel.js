@@ -24,9 +24,8 @@ const schemaUser = new Schema(
             enum: ["starter", "pro", "business"],
             default: "starter"
         },
-        avatar: {
+        avatarURL: {
             type: String,
-            avatarURL: String,
             default: gravatar.url(this.email, {}, true)
         },
         token: String
