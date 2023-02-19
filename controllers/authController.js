@@ -3,12 +3,13 @@ const files = require('../service/filesService');
 
 const registration = async (req, res) => {
     const user = await service.registration(req.body);
+
     res.status(201).json({
         user: {
             username: user.username,
             email: user.email,
             subscription: user.subscription,
-            avatarURL: user.avatarURL,
+            avatarURL: user.avatar,
         }
     });
 }
@@ -50,10 +51,10 @@ const updateUser = async (req, res) => {
 }
 
 const updateAvatar = async (req, res) => {
-    const avatarUrl = await files.updateFiles('avatars', req.file);
-    await service.updateUser(req.user._id, { avatarUrl });
+    const avatarURL = await files.updateFiles('avatars', req.file);
+    await service.updateUser(req.user._id, { avatarURL });
     res.json({
-        avatarUrl,
+        avatarURL,
     });
 }
 

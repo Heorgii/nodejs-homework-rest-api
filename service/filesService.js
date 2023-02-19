@@ -11,8 +11,8 @@ const updateFiles = async (fieldname, file) => {
     const fileId = ` ${uuidv4(10)}.${extension}`;
 
     try {
-        const publicFileUrl = path.join(publicDir, fieldname, fileId);
-        await fs.rename(publicFileUrl, tempName);
+        const resultUpload = path.join(publicDir, fieldname, fileId);
+        await fs.rename(resultUpload, tempName);
         const fileUrl = path.join('public', fieldname, fileId);
         resizeImg(fileUrl);
         return fileUrl;
