@@ -41,7 +41,6 @@ schemaUser.pre('save', async () => {
 
 const User = model('user', schemaUser);
 
-
 const schemaRegister = Joi.object({
     username: Joi.string().min(3).required(),
 
