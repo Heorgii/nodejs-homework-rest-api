@@ -1,15 +1,18 @@
+const sendEmail = require('../helpers/sendEmail');
 const service = require('../service/authService');
 const files = require('../service/filesService');
 
 const registration = async (req, res) => {
     const user = await service.registration(req.body);
+    const { username, email, subscription, avatarURL, verificationToken } = user;
+    await sendEmail(email, verificationToken);
 
     res.status(201).json({
         user: {
-            username: user.username,
-            email: user.email,
-            subscription: user.subscription,
-            avatarURL: user.avatarURL,
+            username: username,
+            email: email,
+            subscription: subscription,
+            avatarURL: avatarURL,
         }
     });
 }
@@ -41,6 +44,24 @@ const getUser = async (req, res) => {
     });
 }
 
+const verifyEmail = async (req, res) => {
+    const { verificationToken } = req.params;
+    await service.verifyEmail(verificationToken);
+    res.json({
+        message: 'Verification successful',
+    });
+}
+
+const resendFerifyEmail = async (req, res) => {
+    const { email } = req.body
+    const { verificationToken } = req.params;
+    await service.resendFerifyEmail(email);
+    await sendEmail(email, verificationToken);
+    res.json({
+        message: 'Verification email sent',
+    });
+}
+
 const updateUser = async (req, res) => {
     const user = await service.updateUser(req.user._id, req.body);
     const { username, email, subscription } = user;
@@ -63,6 +84,8 @@ module.exports = {
     login,
     logout,
     getUser,
+    verifyEmail,
+    resendFerifyEmail,
     updateUser,
     updateAvatar,
 }
