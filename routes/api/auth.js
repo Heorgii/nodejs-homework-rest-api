@@ -21,6 +21,10 @@ router.get('/logout', auth, user.logout);
 
 router.get('/current', auth, user.getUser);
 
+router.get('/verify/:verificationToken', user.verifyEmail);
+
+router.post('/verify', validation(schema.schemaVerifyEmail), user.resendFerifyEmail);
+
 router.patch('/',
     validation(schema.schemaUpdate),
     auth,
@@ -28,9 +32,9 @@ router.patch('/',
 );
 
 router.patch('/avatars',
-   auth,
-   upload.single('avatar'),
-   user.updateAvatar
+    auth,
+    upload.single('avatar'),
+    user.updateAvatar
 );
 
 
